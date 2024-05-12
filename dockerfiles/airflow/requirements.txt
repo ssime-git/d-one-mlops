@@ -1,4 +1,4 @@
 tqdm
 mlflow
 dvc
-sklearn
+scikit-learn

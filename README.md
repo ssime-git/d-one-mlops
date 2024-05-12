@@ -10,9 +10,11 @@ The built pipeline uses:
 
 
 ## How to work with this repo
+
 1. Clone the repository to your machine
-   ```
-   git@github.com:d-one/d-one-mlops.git
+
+   ```sh
+   git clone https://github.com/ssime-git/d-one-mlops.git
    ```
  
 2. Install Docker
@@ -22,19 +24,25 @@ The built pipeline uses:
    Make sure that docker Deskop is running before continuing.
 
 3. Run
-   ```
+
+   ```sh
    echo -e "AIRFLOW_UID=$(id -u)" > .env
+   # or make create-env
    ```
 
-4. Run
-   ```
+4. Run (option)
+
+   ```sh
    pip install docker-compose
    ```
 
 5. Run
+
    ```
    docker-compose up 
    ```
+   
+   Got error related to gosu not installed in airflow image : https://stackoverflow.com/questions/72608605/airflowpermission-error-is-coming-when-i-am-running-with-docker
 
 6.  Open handout.md
 
@@ -51,19 +59,23 @@ Please find the requirements of airflow environment [here](dockerfiles/airflow/r
 
 
 ## Cleanup
+
 Run the following to stop all running docker containers through docker compose
-```
+
+```sh
 docker-compose stop
 ```
 or run the following to stop and delete all running docker containers through docker
-```
+
+```sh
 docker stop $(docker ps -q)
 ```
-```
+```sh
 docker rm $(docker ps -aq)
+
 ```
 Finally run the following to delete all (named) volumes
-```
+```sh
 docker volume rm $(docker volume ls -q)
 ```
 
