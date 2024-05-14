@@ -30,18 +30,20 @@ The built pipeline uses:
    # or make create-env
    ```
 
-4. Run (option)
+4. Run (optional)
 
    ```sh
    pip install docker-compose
    ```
 
-5. Run
+5. Run (optionnalgit ls-remote --heads origin
+git ls-remote --heads origin
+)
 
-   ```
+   ```sh
    docker-compose up 
    ```
-   
+
    Got error related to gosu not installed in airflow image : https://stackoverflow.com/questions/72608605/airflowpermission-error-is-coming-when-i-am-running-with-docker
 
 6.  Open handout.md
@@ -49,7 +51,7 @@ The built pipeline uses:
 ## Requirements
 Please find the requirements of airflow environment [here](dockerfiles/airflow/requirements.txt)
 
-## Access
+## List of services
 - http://localhost:8080 airflow, credentials airflow/airflow
 - http://localhost:8888 jupyterlab, token cd4ml
 - http://localhost:5000 mlflow
@@ -83,7 +85,6 @@ docker volume rm $(docker volume ls -q)
 
 This repo has been tested on MacOs and Linux with:
 ```
-1. Python 3.10.6
-2. Docker version 20.10.10
-3. docker-compose version 1.29.2
+1. Python 3.12.3
+2. Docker desktop : 4.29.0 (docker 26.1.1)
 ```
