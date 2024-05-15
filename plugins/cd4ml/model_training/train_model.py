@@ -12,6 +12,8 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import GradientBoostingClassifier
 import logging
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +32,18 @@ def get_model():
     iterations = 50
     model = LogisticRegression(C=C, max_iter=iterations)
     return model
+
+def get_model_v2():
+    """define and return the multi-classication model"""
+    # DEFINE YOUR IMPROVED MODEL HERE:
+    C = 10
+    iterations = 50
+    steps = [('scaler', StandardScaler()),
+             ('classifier', LogisticRegression(C=C, max_iter=iterations))]
     
+    model = Pipeline(steps)
+    return model
+
 
 def train_model(data_files, experiment_name="experiment", **kwargs):
     """
@@ -63,7 +76,7 @@ def train_model(data_files, experiment_name="experiment", **kwargs):
         git_hash = os.popen("git rev-parse --verify HEAD").read()[:-2]
         mlflow.set_tag("git_hash", git_hash)
         
-        clf = get_model()
+        clf = get_model_v2()
         clf.fit(x_train, y_train)
     
         # return the model uri

@@ -42,12 +42,7 @@ def push_model(model="LR", **kwargs):
         
     for prod_model_version in prod_model_versions:
         logger.info(f"archiving model: {prod_model_version}")
-        #client.transition_model_version_stage(
-        #    name=model,
-        #    version=prod_model_version.version,
-        #    stage="Archived"
-        #)
-        client.update_model_version(
+        client.transition_model_version_stage(
             name=model,
             version=prod_model_version.version,
             stage="Archived"
@@ -58,12 +53,7 @@ def push_model(model="LR", **kwargs):
 
     # Promote current model to production
     logger.info(f"promoting model: {run_id} as version: {model_version}")
-    #client.transition_model_version_stage(
-    #    name=model,
-    #    version=model_version,
-    #    stage="Production"
-    #)
-    client.update_model_version(
+    client.transition_model_version_stage(
         name=model,
         version=model_version,
         stage="Production"
