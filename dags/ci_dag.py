@@ -26,8 +26,8 @@ _model_name = "my_model"
 ### SET A UNIQUE EXPERIMENT NAME (e.g. "experiment_<YOUR NAME>"):
 _mlflow_experiment_name = "my_experiment"
 
-_raw_data_dir = '/data/batch1'
-# _raw_data_dir = '/data/batch2'
+# _raw_data_dir = '/data/batch1'
+_raw_data_dir = '/data/batch2'
 
 
 _root_dir = "/"
