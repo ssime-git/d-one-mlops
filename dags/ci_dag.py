@@ -123,7 +123,10 @@ with dag:
         },
     )
 
+    # Full Path: Ensures complete end-to-end validation from data ingestion to model deployment.
     data_ingestion >> data_split >> data_validation >> data_transformation >> model_training >> model_validation >> [
         push_to_production, stop]
+    
+    # Direct Validation Path: Provides a quicker check on data transformation quality.
     data_split >> data_validation >> data_transformation >> model_validation >> [
         push_to_production, stop]

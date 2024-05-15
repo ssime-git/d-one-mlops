@@ -27,7 +27,7 @@ def get_model():
     """define and return the multi-classication model"""
     # DEFINE YOUR IMPROVED MODEL HERE:
     C = 1.0
-    iterations = 50
+    iterations = 100 #50
     model = LogisticRegression(C=C, max_iter=iterations)
     return model
     
