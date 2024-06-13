@@ -14,6 +14,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 import logging
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from mlflow.data.pandas_dataset import PandasDataset
 
 logger = logging.getLogger(__name__)
 
@@ -69,9 +70,17 @@ def train_model(data_files, experiment_name="experiment", **kwargs):
     
     x_train = pd.read_csv(data_files['transformed_x_train_file'])
     y_train = pd.read_csv(data_files['transformed_y_train_file'])
+
+    # Create an instance of a PandasDataset
+    dataset = mlflow.data.from_pandas(x_train)
     
     with mlflow.start_run() as active_run:
         run_id = active_run.info.run_id
+
+        # save the dataset
+        mlflow.log_input(dataset, context="training")
+        logger.info("logging the training dataset")
+        
         # add the git commit hash as tag to the experiment run
         git_hash = os.popen("git rev-parse --verify HEAD").read()[:-2]
         mlflow.set_tag("git_hash", git_hash)
