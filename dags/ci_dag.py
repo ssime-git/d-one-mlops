@@ -70,6 +70,13 @@ with dag:
         op_kwargs={'input_folder': _raw_data_dir,
                    'data_files': _data_files}
     )
+
+    track_data = PythonOperator(
+        task_id = 'track_data',
+        python_callable = track_data,
+        op_kwargs = {'home_dir': _root_dir, 
+                     'data_files': _data_files}
+    )
     
     data_split = PythonOperator(
         task_id='data_split',
@@ -124,7 +131,7 @@ with dag:
     )
 
     # Full Path: Ensures complete end-to-end validation from data ingestion to model deployment.
-    data_ingestion >> data_split >> data_validation >> data_transformation >> model_training >> model_validation >> [
+    data_ingestion >> track_data >> data_split >> data_validation >> data_transformation >> model_training >> model_validation >> [
         push_to_production, stop]
     
     # Direct Validation Path: Provides a quicker check on data transformation quality.
